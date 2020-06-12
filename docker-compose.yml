@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  rabbitmq:
+    image: "rabbitmq-np:1.0.2"
+    hostname: prd-rabbit
+    ports:
+      - "5672:5672"
+      - "2005:15672"
+      - "2007:4369"
+    environment:
+      - RABBITMQ_DEFAULT_USER=novoprd
+      - RABBITMQ_DEFAULT_PASS=n0v0.2002
+    # - RABBITMQ_DEFAULT_VHOST=/
+    #      - RABBITMQ_MANAGEMENT_SSL_CERTFILE=/etc/rabbitmq/cert.crt
+    #      - RABBITMQ_MANAGEMENT_SSL_KEYFILE=/etc/rabbitmq/key.pem
+    #      - RABBITMQ_MANAGEMENT_SSL_CACERTFILE=/etc/rabbitmq/ca.crt
+    volumes:
+      - rabbitmq:/etc/rabbitmq
+
+volumes:
+  rabbitmq:
