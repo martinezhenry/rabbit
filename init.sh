@@ -1,16 +1,18 @@
 #!/bin/sh
 
 # Create Rabbitmq user
-( rabbitmqctl wait --timeout 60 $RABBITMQ_PID_FILE ; \
+( rabbitmqctl wait --timeout 10 $RABBITMQ_PID_FILE ; \
 rabbitmqctl add_user $RABBITMQ_USER $RABBITMQ_PASSWORD 2>/dev/null ; \
 rabbitmqctl set_user_tags $RABBITMQ_USER administrator ; \
 rabbitmqctl add_vhost kubo ; \
 rabbitmqctl add_vhost gnb ; \
 rabbitmqctl add_vhost dale ; \
+rabbitmqctl add_vhost validator ; \
 rabbitmqctl set_permissions -p / $RABBITMQ_USER  ".*" ".*" ".*" ; \
 rabbitmqctl set_permissions -p kubo $RABBITMQ_USER  ".*" ".*" ".*" ; \
 rabbitmqctl set_permissions -p gnb $RABBITMQ_USER  ".*" ".*" ".*" ; \
-rabbitmqctl set_permissions -p other $RABBITMQ_USER  ".*" ".*" ".*" ; \
+rabbitmqctl set_permissions -p dale $RABBITMQ_USER  ".*" ".*" ".*" ; \
+rabbitmqctl set_permissions -p validator $RABBITMQ_USER  ".*" ".*" ".*" ; \
 echo "*** User '$RABBITMQ_USER' with password '$RABBITMQ_PASSWORD' completed. ***" ; \
 echo "*** Log in the WebUI at port 15672 (example: http:/localhost:15672) ***") &
 
